@@ -112,6 +112,7 @@ function twoDigitsTime(num) {
     return num;
 }
 
+
 function getTime() {
     return `${twoDigitsTime(new Date().getHours())}:${twoDigitsTime(new Date().getMinutes())}:${twoDigitsTime(new Date().getSeconds())}`;
 }
