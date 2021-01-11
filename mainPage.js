@@ -1,4 +1,4 @@
-import {} from '/home.js';
+import {} from 'home.js';
 window.onload = () => {
     //header
     document.querySelector('body').innerHTML = '<div id="header"></div>';
