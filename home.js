@@ -111,9 +111,11 @@ function twoDigitsTime(num) {
     }
     return num;
 }
-export function getTime() {
+
+function getTime() {
     return `${twoDigitsTime(new Date().getHours())}:${twoDigitsTime(new Date().getMinutes())}:${twoDigitsTime(new Date().getSeconds())}`;
 }
-export function getDate() {
+
+function getDate() {
     return `${twoDigitsTime(new Date().getDate())}/${twoDigitsTime(new Date().getMonth() + 1)}/${new Date().getUTCFullYear()}`;
 }
