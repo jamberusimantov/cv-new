@@ -1,4 +1,4 @@
-let currentTime, imgAdressArray, imgDescriptionSpan, imgDescriptionPg, timeInterval;
+let currentTime, imgAdressArray, imgDescriptionSpan, imgDescriptionPg, urls, timeInterval;
 let sliderIterator = 0;
 window.onload = () => {
     set_header();
@@ -12,14 +12,17 @@ function set_portfolio_grid() {
     portfolioPage.innerHTML += '<div id="portfolioGrid"></div>';
     imgAdressArray.forEach((adress, index) => {
         portfolioGrid.innerHTML += `<div id="flipbox${index}"class="flipbox"></div>`;
-        document.getElementById(`flipbox${index}`).innerHTML += `<img id="flipboxImg${index}"class="flipboxImg" src="${adress}">`;
+        document.getElementById(`flipbox${index}`).innerHTML += `<a id="link${index}" href="${urls[index]}" target="_blank"></a>`;
+        document.getElementById(`link${index}`).innerHTML += `<img id="flipboxImg${index}"class="flipboxImg" src="${adress}">`;
     })
 }
 
 function set_sliderArrays() {
+    urls = [];
     imgAdressArray = [];
     for (let i = 1; i <= 30; i++) {
         imgAdressArray[i - 1] = (i < 2) ? `./assets/${i}.jpg` : `./assets/2.jpg`;
+        urls[i - 1] = (i < 2) ? 'https://jamberusimantov.github.io/search-anime/.' : `#`;
     }
     imgDescriptionSpan = ['anime search', '2', '3', '4'];
     imgDescriptionPg = ['search for new anime and related gifs',
