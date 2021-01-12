@@ -28,7 +28,7 @@ body {
 #leftNav,
 .rightNav {
     display: inline-block;
-    padding: 2vh;
+    padding: 1vh;
 }
 
 #leftNav {
@@ -40,7 +40,7 @@ body {
 }
 
 .rightNav a {
-    padding: 2vh;
+    padding: 1vh;
 }
 
 #nav a {
@@ -51,18 +51,18 @@ body {
 
 #logo {
     color: #eee;
-    padding: 0 1vh;
+    padding: 0 1vh 0 0;
 }
 
 #chatBtn {
     float: left;
     border: 1px #eee solid;
     border-radius: 100vw;
-    padding: 3px 10px;
+    padding: 1px 10px;
     margin: 2vh;
     background-color: rgba(0, 0, 0, 0.2);
     color: #eee;
-    font-size: small;
+    font-size: xx-small;
 }
 
 #greenDotChatBtn {
@@ -76,7 +76,7 @@ body {
 
 #menuBtn {
     float: right;
-    padding: 2vh;
+    padding: 1vh;
     color: #eee;
     font-size: x-large;
 }
@@ -102,21 +102,23 @@ body {
     position: relative;
     left: -15px;
     bottom: 5px;
-    background-color: rgb(38, 250, 38);
+    background-color: greenyellow;
     border: 1px white solid;
 }
 
 #time {
-    text-align: center;
-    color: #eee;
+    position: absolute;
+    top: 9vh;
+    left: 10%;
+    color: #aaa;
     font-weight: 500;
-    padding: 2vh;
+    font-size: x-small;
 }
 
 #intro {
     position: relative;
     background-color: #3b5998;
-    height: 25vh;
+    height: 65vh;
     width: 100%;
 }
 
@@ -148,38 +150,6 @@ body {
     max-width: 1200px;
 }
 
-#sliderDescriptionContainer {
-    margin: auto;
-    display: flex;
-    flex-flow: row wrap;
-    width: 960px;
-    justify-items: center;
-    align-items: center;
-}
-
-#sliderDescription {
-    margin: auto;
-    max-width: 80%;
-}
-
-#sliderContainer {
-    display: flex;
-    flex-flow: row wrap;
-    width: 80%;
-    justify-items: center;
-    align-items: center;
-}
-
-.sliderBox {
-    display: inline-block;
-    text-align: center;
-}
-
-.sliderDescriptionBox {
-    display: inline-block;
-    text-align: center;
-}
-
 #previousBtn,
 #nextBtn {
     display: inline-block;
@@ -187,9 +157,25 @@ body {
     font-size: 50px;
 }
 
-#sliderImg1,
-#sliderImg2,
-#sliderImg3 {
+#sliderContainer {
+    display: flex;
+    flex-flow: row wrap;
+    width: 80%;
+    justify-items: center;
+}
+
+.sliderBox {
+    display: inline-block;
+    text-align: center;
+}
+
+.sliderBoxFlex {}
+
+.pic {}
+
+.description {}
+
+.sliderImg {
     width: 90%;
 }
 
@@ -210,13 +196,7 @@ body {
     [id="inspirational"] {
         font-size: 3.9vw;
     }
-    /* [id="sliderDescription"] {
-        grid-template-columns: auto auto auto;
-    } */
     [class="sliderBox"] {
-        width: 33.33%;
-    }
-    [class="sliderDescriptionBox"] {
         width: 33.33%;
     }
 }
@@ -231,19 +211,10 @@ body {
     [id="inspirational"] {
         font-size: 5vw;
     }
-    /* [id="sliderDescription"] {
-        grid-template-columns: auto auto;
-    } */
     [class="sliderBox"] {
         width: 50%;
     }
-    [class="sliderDescriptionBox"] {
-        width: 50%;
-    }
     [id="sliderBox3"] {
-        display: none;
-    }
-    [id="sliderDescriptionBox3"] {
         display: none;
     }
 }
@@ -258,25 +229,13 @@ body {
     [id="inspirational"] {
         font-size: 9vw;
     }
-    /* [id="sliderDescription"] {
-        grid-template-columns: auto;
-    } */
     [class="sliderBox"] {
-        width: 100%;
-    }
-    [class="sliderDescriptionBox"] {
         width: 100%;
     }
     [id="sliderBox2"] {
         display: none;
     }
-    [id="sliderDescriptionBox2"] {
-        display: none;
-    }
     [id="sliderBox3"] {
-        display: none;
-    }
-    [id="sliderDescriptionBox3"] {
         display: none;
     }
 }
