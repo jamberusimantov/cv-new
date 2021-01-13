@@ -25,7 +25,7 @@ function set_header() {
     leftNav.innerHTML += "<a id='homeBtn' href='index.html'>jamberu.siman-tov</a>";
     chatBtn.innerHTML = "<div id='greenDotChatBtn'></div> ONLINE"
     contact.innerHTML = "<a href=''>CONTACT</a>";
-    portfolio.innerHTML = "<a href='portfolio.html'>PORTFOLIO</a>";
+    portfolio.innerHTML = "<a href='/portfolio.html'>PORTFOLIO</a>";
     about.innerHTML = "<a href=''>ABOUT</a>";
     menuBtn.innerHTML = "<i class='material-icons'>menu</i>";
 }
