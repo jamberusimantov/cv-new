@@ -4,21 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="my web dev portfolio">
-    <meta name="autor" content="jamberu.simantov">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="index.css">
-    <title>JAMBER SIMAN-TOV homePage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Portfolio</title>
 </head>
 
-<body id='homePage'>
-
-
-
-
-    <script src="index.js"></script>
+<body>
+    <header class="header2">
+        <div id="menuBtn" class="flex-row-wrap-center">
+            <span id='hamburger'>
+                <span id='bar1' class='burger'></span><span id='bar2' class='burger'></span><span id='bar3' class='burger'></span>
+            </span>
+        </div>
+        <nav id="navbar">
+            <ul class="navList top-navlist">
+                <li class="navItem "><a href="#home"><span id="navHome">Home</span></a></li>
+                <li class="navItem"><a href="#about"><span id="navAbout">About</span></a></li>
+                <li class="navItem "><a href="#projects"><span id="navProjects">Projects</span></a></li>
+                <li class="navItem "><a href="#contact"><span id="navContact">Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class='section bg flex-column-wrap-center'>
+            <h1 id="intro"></h1>
+        </section>
+        <section id="about" class='section'>
+            <h1 class="sectionTitle">About</h1>
+            <div class="container flex-culomn-wrap-center">
+                <div class="flex-row-wrap-center">
+                    <div id="about-pic" class="bg bg-center"></div>
+                </div>
+                <p id="about-text">
+                    <p class='about-text-sentence' id='sentence0'></p>
+                    <p class='about-text-sentence' id='sentence1'></p>
+                    <p class='about-text-sentence' id='sentence2'></p>
+                    <p class='about-text-sentence' id='sentence3'></p>
+                    <p class='about-text-sentence' id='sentence4'></p>
+                </p>
+                <div class="flex-row-wrap-center">
+                    <div id="about-moto" class="bg bg-center"></div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class='section'>
+            <h1 class="sectionTitle">Projects</h1>
+            <div class="container" id="projects-container"></div>
+        </section>
+        <section id="slider">
+            <div id="slider_img" class="bg bg-left"></div>
+        </section>
+        <section id="contact" class='section'>
+            <h1 class="sectionTitle">Contact</h1>
+            <div class="container-form">
+                <form class="flex-column-wrap-center" onsubmit="return false ">
+                    <div class="form-input-container">
+                        <label for="name">Full name:</label>
+                        <input type="text" name="name" placeholder="Full name here..." required class="form-input">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="email">email:</label>
+                        <input type="text " name="email " placeholder="Email address here..." required class="form-input">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="phone">Phone:</label>
+                        <input type="text " name="phone " placeholder="Phone number here..." class="form-input">
+                    </div>
+                    <div class="form-input-container">
+                        <label for="message">Message:</label>
+                        <textarea name="message " placeholder="Message here..." rows="8 " required class="form-input"></textarea>
+                    </div>
+                    <button type="submit " id="submitBtn">Send message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav id="socialbar">
+            <ul class="navList flex-row-wrap-center">
+                <li class="navItem"><a href="https://www.linkedin.com/in/siman-tov-jamberu" target="_blank" class="social links"><i class="fa fa-linkedin "></i></a></li>
+                <li class="navItem "><a href="https://www.github.com/jamberusimantov" target="_blank" class="social links"><i class="fa fa-github "></i></a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="index.js "></script>
 </body>
 
 </html>

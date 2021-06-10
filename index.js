@@ -1,130 +1,225 @@
-let currentTime, imgAdressArray, imgDescriptionSpan, imgDescriptionPg, sliderInterval, timeInterval;
-let sliderIterator = 0;
 window.onload = () => {
-    set_header();
-    set_chat();
-    decorateHeader();
-    set_slider();
-    sliderInterval = setInterval(auto_slider, 3000);
-    timeInterval = setInterval(updateTime, 1000);
-    previousBtn.addEventListener('click', sliderChanger);
-    nextBtn.addEventListener('click', auto_slider);
-}
+    window.addEventListener('scroll', scrollHandler)
+    hamburger.addEventListener('click', menuToggle)
 
-function set_header() {
-    homePage.innerHTML = '<div id="header"></div>';
-    header.innerHTML = "<ul id='nav'></ul>";
-    header.innerHTML += "<div id='time'></div>";
-    nav.innerHTML = "<li id='leftNav'></li>";
-    nav.innerHTML += "<li id='chatBtn'></li>";
-    nav.innerHTML += `<li class="rightNav" id="contact"></li>`;
-    nav.innerHTML += `<li class='rightNav' id="portfolio"></li>`;
-    nav.innerHTML += `<li class='rightNav' id="about"></li>`;
-    nav.innerHTML += "<li id='menuBtn'></li>";
-    leftNav.innerHTML = "<i id='logo' class='fas fa-align-left'></i>";
-    leftNav.innerHTML += "<a id='homeBtn' href='index.html'>jamberu.siman-tov</a>";
-    chatBtn.innerHTML = "<div id='greenDotChatBtn'></div> ONLINE"
-    contact.innerHTML = "<a href=''>CONTACT</a>";
-    portfolio.innerHTML = "<a href='portfolio.html'>PORTFOLIO</a>";
-    about.innerHTML = "<a href=''>ABOUT</a>";
-    menuBtn.innerHTML = "<i class='material-icons'>menu</i>";
-}
-
-function set_chat() {
-    homePage.innerHTML += "<div id='chatIcon'></div>";
-    chatIcon.innerHTML = "<img id='icon' src='./assets/icon.jpeg'>";
-    chatIcon.innerHTML += "<div id='greenDotIcon'></div>";
-}
-
-function decorateHeader() {
-    homePage.innerHTML += "<div id='intro'></div>";
-    intro.innerHTML = " <h1 id='inspirational'></h1>";
-    inspirational.innerHTML = "<span id='insipreLine1'>YOU ONLY LIVE ONCE</span><br>";
-    inspirational.innerHTML += "<span id='insipreLine2'>BUT IF YOU DO IT RIGHT</span><br>";
-    inspirational.innerHTML += "<span id='insipreLine3'>ONCE IS ENOUGH</span>";
-    intro.innerHTML += " <img id='navImg' src='./assets/main-bg-low.jpg'>";
-}
-
-function set_slider() {
-    let sliderBoxDiv, sliderBoxFlexDiv, picDiv, descriptionDiv;
-    set_sliderArrays();
-    homePage.innerHTML += "<div id='slider'></div>";
-    slider.innerHTML = "<i id='previousBtn' class='material-icons'> keyboard_arrow_left</i>";
-    slider.innerHTML += "<div id='sliderContainer'></div>";
-    slider.innerHTML += "<i id='nextBtn' class='material-icons'> keyboard_arrow_right</i>";
-    for (let i = 0; i < 3; i++) {
-        let index = i + 1;
-        sliderContainer.innerHTML += `<div class='sliderBox' id='sliderBox${index}'>box${index}</div>`;
-        sliderBoxDiv = document.getElementById(`sliderBox${index}`);
-        sliderBoxDiv.innerHTML = `<div class="sliderBoxFlex" id="sliderBoxFlex${index}"></div>`;
-        sliderBoxFlexDiv = document.getElementById(`sliderBoxFlex${index}`);
-        sliderBoxFlexDiv.innerHTML = `<div class="pic" id="pic${index}"></div>`;
-        sliderBoxFlexDiv.innerHTML += `<div class="description" id="description${index}"></div>`;
-        picDiv = document.getElementById(`pic${index}`)
-        picDiv.innerHTML = `<img id='sliderImg${index}' class='sliderImg' src='${imgAdressArray[i]}'>`;
-        descriptionDiv = document.getElementById(`description${index}`)
-        descriptionDiv.innerHTML = `<p class="sliderSpan" id='sliderSpan${index}'></p>`;
-        descriptionDiv.innerHTML += `<p class="sliderPg" id='sliderPg${index}'></p>`;
-    }
-}
-
-function auto_slider() {
-    sliderChanger(1);
-}
-
-function sliderChanger(param) {
-    let action = (param == 1) ? next() : previous();
-    for (let i = 0; i < 3; i++) {
-        let index = (action + i) % imgAdressArray.length;
-        let img = document.getElementById(`sliderImg${i + 1}`);
-        let span = document.getElementById(`sliderSpan${i + 1}`);
-        let p = document.getElementById(`sliderPg${i + 1}`);
-        img.src = `${imgAdressArray[index]}`;
-        span.innerHTML = `${imgDescriptionSpan[index]}`;
-        p.innerHTML = `${imgDescriptionPg[index]}`;
-    }
-}
-
-function next() {
-    return ++sliderIterator;
-}
-
-function previous() {
-    if (sliderIterator == 0) {
-        sliderIterator = imgAdressArray.length;
-    }
-    return --sliderIterator;
-}
-
-function set_sliderArrays() {
-    imgAdressArray = [];
-    for (let i = 1; i <= 4; i++) {
-        imgAdressArray[i - 1] = (i < 2) ? `./assets/${i}.jpg` : `./assets/2.jpg`;
-    }
-    imgDescriptionSpan = ['anime search', 'Lorem2', 'Lorem3', 'Lorem4'];
-    imgDescriptionPg = ['search for new anime and related gifs',
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut, illum!',
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut, illum!',
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut, illum!'
+    const intro = document.getElementById('intro')
+    const sentences = document.getElementsByClassName('about-text-sentence')
+    const sections = document.getElementsByClassName('section')
+    const span = 'Coding is fun and at the end of the day, if I can say I had fun It was a good day.';
+    const sentence = [
+        'My name is Siman-tov, and I’m a Full Stack web developer.',
+        'I’m self-motivated and enjoy expanding my knowledge.',
+        'Recently I completed a 2000 hours of theoretic and practical studies in programming including HTML, CSS, Javascript, React, Redux, TypeScript, Nodejs, API Using Express, MongoDB, and... OOP, among others.',
+        'I read a lot and consult professionals so I’m sure there’s no challenge I can’t face.',
+        'I’m currently looking for a Full Stack position, but I’m open to other positions in this area for acquiring experience and broadening my knowledge.'
     ];
-}
-
-function twoDigitsTime(num) {
-    if (num < 10) {
-        num = `0${num}`;
+    const introWordsArray = span.split(" ");
+    const sectionsArray = new Array()
+    const interval = 50;
+    let sentencesCounter = 0;
+    let introCounter = 0;
+    let aboutTextCounter = 0;
+    let offsetCounter = 0;
+    let sectionsIndex = 0;
+    let sliderIndex = 0;
+    let isFirstScroll = true;
+    let isMenuOpen = false;
+    let skillsCounter = 0;
+    const myProjects = [
+        ['users-portal', './assets/myProjects/mern- users.jpg', ''],
+        ['jobOffers portal', './assets/myProjects/jobPortal_TechCareer.jpg', ''],
+    ]
+    const sliderPicsArray = [];
+    for (const key in sections) {
+        if (Object.hasOwnProperty.call(sections, key)) {
+            const element = sections[key];
+            const navRef = `nav${element.id.replace(element.id[0], element.id[0].toUpperCase())}`;
+            sectionsArray.push([element.id, {
+                index: sectionsIndex,
+                section: element,
+                nav: document.getElementById(navRef),
+                height: offsetCounter
+            }]);
+            offsetCounter += element.offsetHeight;
+            sectionsIndex += 1;
+        }
     }
-    return num;
-}
+    for (let i = 0; i < 3; i++) {
+        sliderPicsArray.push(`./assets/myPics/${i}.jpg`);
+    }
+    pushText(introWordsArray, interval, intro, introCounter, "intro-word")
+    myProjects.forEach(fillProject)
 
-function getTime() {
-    return `${twoDigitsTime(new Date().getHours())}:${twoDigitsTime(new Date().getMinutes())}:${twoDigitsTime(new Date().getSeconds())}`;
-}
+    function menuToggle() {
+        const burgers = document.getElementsByClassName('burger')
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+            burgers.bar1.classList.add('bar1Open')
+            burgers.bar2.classList.add('bar2Open')
+            burgers.bar3.classList.add('bar3Open')
+            navbar.style.display = 'block';
+        } else {
+            burgers.bar1.classList.remove('bar1Open')
+            burgers.bar2.classList.remove('bar2Open')
+            burgers.bar3.classList.remove('bar3Open')
+            navbar.style.display = '';
+        }
+    }
 
-function getDate() {
-    return `${twoDigitsTime(new Date().getDate())}/${twoDigitsTime(new Date().getMonth() + 1)}/${new Date().getUTCFullYear()}`;
-}
+    function fillProject(project) {
+        const projectsContainer = document.getElementById('projects-container')
+        projectsContainer.appendChild(document.createElement('div'))
+        projectsContainer.lastElementChild.classList.add('flip-card')
+        const flipCard = document.getElementsByClassName('flip-card')[document.getElementsByClassName('flip-card').length - 1]
+        flipCard.appendChild(document.createElement('div'))
+        flipCard.lastElementChild.classList.add('flip-card-inner')
+        const flipCardInner = document.getElementsByClassName('flip-card-inner')[document.getElementsByClassName('flip-card-inner').length - 1]
+        flipCardInner.appendChild(document.createElement('div'))
+        flipCardInner.lastElementChild.classList.add('flip-card-front')
+        flipCardInner.lastElementChild.classList.add('flex-column-wrap-center')
+        flipCardInner.appendChild(document.createElement('div'))
+        flipCardInner.lastElementChild.classList.add('flip-card-back')
+        flipCardInner.lastElementChild.classList.add('flex-row-wrap-center')
+        const flipCardFront = document.getElementsByClassName('flip-card-front')[document.getElementsByClassName('flip-card-front').length - 1]
+        flipCardFront.appendChild(document.createElement('img'))
+        flipCardFront.lastElementChild.classList.add('flip_img')
+        flipCardFront.lastElementChild.src = project[1];
+        const flipCardBack = document.getElementsByClassName('flip-card-back')[document.getElementsByClassName('flip-card-back').length - 1]
+        flipCardBack.appendChild(document.createElement('h1'))
+        flipCardBack.lastElementChild.appendChild(document.createTextNode(project[0]))
+        flipCardBack.appendChild(document.createElement('p'))
+        flipCardBack.lastElementChild.appendChild(document.createTextNode(project[2]))
+    }
 
-function updateTime() {
-    currentTime = `${getTime()}  ${getDate()}`;
-    time.innerText = currentTime;
+    function scrollHandler() {
+        const currentHeight = window.scrollY;
+        const getCurrentSection = (array) => {
+            if (array.length === 1) return array[0][1].index;
+            const arr0 = array.slice(0, Math.floor(array.length / 2))
+            const arr1 = array.slice(Math.floor(array.length / 2))
+            return currentHeight >= arr1[0][1].height ? getCurrentSection(arr1) : getCurrentSection(arr0)
+        }
+        const section = getCurrentSection(sectionsArray)
+        const navRef = sectionsArray[section][1].nav;
+        let nextNavRef;
+        let previousNavRef;
+        switch (true) {
+            case (section === 0):
+                {
+                    previousNavRef = sectionsArray[sectionsArray.length - 1][1].nav;
+                    nextNavRef = sectionsArray[1][1].nav;
+                    break;
+                }
+            case (section === sections.length - 1):
+                {
+                    previousNavRef = sectionsArray[section - 1][1].nav;
+                    break;
+                }
+            default:
+                {
+                    if (isFirstScroll) {
+                        pushText(sentence[sentencesCounter].split(" "), interval, sentences[sentencesCounter], aboutTextCounter, "summery-word")
+                        setInterval(changePic, 2000);
+                        isFirstScroll = false;
+                    }
+                    nextNavRef = sectionsArray[section + 1][1].nav;
+                    previousNavRef = sectionsArray[section - 1][1].nav;
+                }
+        }
+        navRef.classList.add("emphasize");
+        nextNavRef && nextNavRef.classList.remove("emphasize");
+        previousNavRef.classList.remove("emphasize");
+    }
+
+    function pushText(arr, interval, node, counter, className) {
+        const buzzWords = {
+            fun: 'fun',
+            coding: 'coding',
+            day: 'day',
+            good: 'good'
+        }
+        const skills = {
+            html: 'HTML',
+            css: 'CSS',
+            javascript: 'Javascript',
+            react: 'React',
+            redux: 'Redux',
+            typescript: 'TypeScript',
+            nodejs: 'Nodejs',
+            api: 'API',
+            using: 'Using',
+            express: 'Express',
+            mongodb: 'MongoDB',
+        };
+        if (!arr.length && node.id === `sentence${sentencesCounter}` && sentencesCounter < sentences.length - 1) {
+            setTimeout(() => {
+                pushText(sentence[++sentencesCounter].split(" "), interval, sentences[sentencesCounter], aboutTextCounter, "summery-word")
+            }, 500)
+        }
+        if (!arr.length) return;
+        const word = arr.shift()
+        const isBuzzWord = buzzWords[word.toLowerCase()]
+        const isSkill = skills[word.toLowerCase()] || skills[word.toLowerCase().substr(0, word.length - 1)]
+        if (isBuzzWord) {
+            node.innerHTML += `<em class="${className}"></em>`
+        } else if (isSkill) {
+            if (!document.getElementById('skills')) {
+                node.innerHTML += `<em id="skills"></em>`
+            }
+        } else {
+            node.innerHTML += `<span class="${className}"></span>`
+        }
+        if (isSkill) {
+            const sameElement = document.getElementById('skills')
+            const pushTextInterval = setInterval(() => {
+                let charToPush = word.charAt(counter++);
+                if (!charToPush) {
+                    sameElement.textContent = sameElement.textContent.trim() === skills.mongodb ||
+                        sameElement.textContent.substr(0, sameElement.textContent.length - 1).trim() === skills.mongodb ?
+                        `${sameElement.textContent} ` : ' ';
+                    clearInterval(pushTextInterval);
+                    counter = 0
+                        // setTimeout(() => {
+                    pushText(arr, 100, node, counter, className)
+                        // }, 500)
+                } else {
+                    sameElement.textContent += charToPush;
+                }
+            }, interval)
+
+        } else {
+            // setInterval(() => {
+            //     const { html, css, javascript, react, redux, typescript, nodejs, api, using, express, mongodb } = skills
+            //     const skillsArray = [html, css, javascript, react, redux, typescript, nodejs, api, using, express, mongodb]
+            //     sameElement.textContent = skillsCounter < skillsArray.length - 1 ? skillsArray[skillsCounter++] : skillsArray[0]
+            //     console.log(skillsCounter);
+            // }, 1000);
+            const newElement = document.getElementsByClassName(className)[document.getElementsByClassName(className).length - 1]
+            const pushTextInterval = word === '2000' ? setInterval(() => {
+                if (counter !== 200) {
+                    newElement.textContent = ++counter * 10;
+                } else {
+                    clearInterval(pushTextInterval);
+                    counter = 0
+                    newElement.textContent += ' ';
+                    pushText(arr, interval, node, counter, className)
+                }
+
+            }, 0) : setInterval(() => {
+                let charToPush = word.charAt(counter++);
+                if (!charToPush) {
+                    clearInterval(pushTextInterval);
+                    counter = 0
+                    newElement.textContent += ' ';
+                    pushText(arr, interval, node, counter, className)
+                }
+                newElement.textContent += charToPush;
+            }, interval)
+        }
+    }
+
+    function changePic() {
+        document.getElementById('slider_img').style.backgroundImage = `url(${sliderPicsArray[sliderIndex]})`;
+        sliderIndex === sliderPicsArray.length - 1 ? sliderIndex = 0 : sliderIndex++
+    }
 }
