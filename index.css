@@ -247,6 +247,12 @@ footer {
     display: grid;
 }
 
+@media only screen and (min-width:1025px) {
+    #projects-container {
+        grid-template-columns: auto auto;
+    }
+}
+
 .flip-card {
     background-color: transparent;
     width: 100%;
